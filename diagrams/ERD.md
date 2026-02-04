@@ -1,6 +1,5 @@
 # ER Diagram – Doctor Patient Management System
 
-```mermaid
 erDiagram
 
     USERS {
@@ -62,31 +61,6 @@ erDiagram
         timestamp rescheduled_at
     }
 
-    PAYMENTS {
-        int payment_id PK
-        int appointment_id FK
-        float amount
-        string payment_method
-        string payment_status
-        timestamp transaction_date
-    }
-
-    CHATS {
-        int chat_id PK
-        int doctor_id FK
-        int patient_id FK
-        string last_message
-        timestamp updated_at
-    }
-
-    CHAT_MESSAGES {
-        int message_id PK
-        int chat_id FK
-        int sender_id FK
-        string message_text
-        timestamp sent_at
-    }
-
     USERS ||--|| PATIENTS : "is"
     USERS ||--|| DOCTORS : "is"
 
@@ -96,9 +70,3 @@ erDiagram
     DOCTOR_AVAILABILITY ||--|| APPOINTMENTS : schedules
 
     APPOINTMENTS ||--o{ APPOINTMENT_RESCHEDULES : has
-    APPOINTMENTS ||--|| PAYMENTS : generates
-
-    DOCTORS ||--o{ CHATS : participates
-    PATIENTS ||--o{ CHATS : participates
-    CHATS ||--o{ CHAT_MESSAGES : contains
-    USERS ||--o{ CHAT_MESSAGES : sends
