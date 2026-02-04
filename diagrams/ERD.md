@@ -1,5 +1,6 @@
 # ER Diagram – Doctor Patient Management System
 
+```mermaid
 erDiagram
 
     USERS {
