@@ -2,12 +2,6 @@
 
 This is the Entity-Relationship (ER) Diagram for the "Schedula - Pati" doctor appointment booking system, derived from the 25-page wireframe PDF. It includes all entities, attributes, relationships, and notes for a scalable database design (normalized to 3NF).
 
-![ER Diagram](diagram/doctor-patient-diagram.svg)
-
-### Mermaid Source (Editable)
-
-Copy this into tools like Mermaid Live or draw.io for editing/rendering. GitHub renders it below.
-
 ```mermaid
 erDiagram
     %% Note: All entities, attributes, and relationships are included as per schema. Composite PKs are noted in attributes. Weak entities (e.g., Messages) are handled via dependencies.
