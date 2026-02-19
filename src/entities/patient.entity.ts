@@ -16,6 +16,9 @@ export class Patient {
   medical_notes: string;
 
   @Column({ nullable: true })
+  mobile_number: string;
+
+  @Column({ nullable: true })
   user_id: number;
 
   @OneToOne(() => User, { cascade: true })

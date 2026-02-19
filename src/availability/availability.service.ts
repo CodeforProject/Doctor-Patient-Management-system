@@ -11,8 +11,16 @@ export class AvailabilityService {
     @InjectRepository(Doctor) private doctorRepository: Repository<Doctor>,
   ) {}
 
-  async addAvailability(doctorId: number, data: Partial<DoctorAvailability>) {
-    const availability = this.availabilityRepository.create({ ...data, doctor_id: doctorId });
+  async addAvailability(userId: number, data: Partial<DoctorAvailability>) {
+    const doctor = await this.doctorRepository.findOne({ where: { user_id: userId } });
+    if (!doctor) {
+      throw new Error('Doctor profile not found');
+    }
+    
+    const availability = this.availabilityRepository.create({
+      ...data,
+      doctor_id: doctor.doctor_id,
+    });
     return this.availabilityRepository.save(availability);
   }
 

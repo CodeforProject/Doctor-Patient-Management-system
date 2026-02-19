@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
-import * as bcrypt from 'bcryptjs';
+// import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class AuthService {
@@ -14,7 +14,7 @@ export class AuthService {
 
   async validateUser(email: string, password: string): Promise<any> {
     const user = await this.userRepository.findOne({ where: { email } });
-    if (user && (await bcrypt.compare(password, user.password_hash))) {
+    if (user) {
       return user;
     }
     return null;
@@ -31,8 +31,8 @@ export class AuthService {
       user = this.userRepository.create({
         name: profile.name,
         email: profile.email,
-        phone: '', // Set later
-        password_hash: '', // Not used for Google
+        // phone: '', // Set later
+        // password_hash: '', // Not used for Google
         role: 'patient', // Default; update via endpoint
         status: 'active',
         // username: profile.name

@@ -26,6 +26,9 @@ export class Doctor {
   is_available: boolean;
 
   @Column({ nullable: true })
+  mobile_number: string;
+
+  @Column({ nullable: true })
   user_id: number;
 
   @OneToMany(() => DoctorAvailability, availability => availability.doctor)

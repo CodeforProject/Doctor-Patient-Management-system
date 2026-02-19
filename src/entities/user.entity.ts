@@ -12,11 +12,6 @@ export class User {
   @Column({ unique: true })
   email: string;
 
-  @Column()
-  phone: string;
-
-  @Column()
-  password_hash: string;
 
   @Column({ type: 'enum', enum: ['doctor', 'patient'] })
   role: string;
