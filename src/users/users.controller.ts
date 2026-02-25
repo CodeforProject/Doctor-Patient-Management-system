@@ -11,13 +11,13 @@ export class UsersController {
 
   @Post('patient-profile')
   @Roles('patient')
-  createPatientProfile(@Req() req, @Body() data) {
+  createPatientProfile(@Req() req, @Body() data: any) {
     return this.usersService.createPatientProfile(req.user.userId, data);
   }
 
   @Post('doctor-profile')
   @Roles('doctor')
-  createDoctorProfile(@Req() req, @Body() data) {
+  createDoctorProfile(@Req() req, @Body() data: any) {
     return this.usersService.createDoctorProfile(req.user.userId, data);
   }
 
@@ -26,7 +26,6 @@ export class UsersController {
     return this.usersService.getUserProfile(req.user.userId, req.user.role);
   }
 
-  // Updated: Endpoint to set role only (no username)
   @Post('set-role')
   setRole(@Req() req, @Body() data: { role: string }) {
     return this.usersService.setUserRole(req.user.userId, data.role);

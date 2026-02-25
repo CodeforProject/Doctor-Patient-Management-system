@@ -21,7 +21,7 @@ export class Patient {
   @Column({ nullable: true })
   user_id: number;
 
-  @OneToOne(() => User, { cascade: true })
-  @JoinColumn({ name: 'user_id' })  // FK on patients table
+  @OneToOne(() => User, { eager: true })
+  @JoinColumn({ name: 'user_id' })
   user: User;
 }
