@@ -6,6 +6,7 @@ import { User } from '../entities/user.entity';
 import { Patient } from '../entities/patient.entity';
 import { Doctor } from '../entities/doctor.entity';
 import { DoctorAvailability } from '../entities/doctor-availability.entity';
+import { Appointment } from 'src/appointments/entities/appointment.entity';
 
 @Module({
   imports: [
@@ -18,8 +19,10 @@ import { DoctorAvailability } from '../entities/doctor-availability.entity';
         username: configService.get('DATABASE_USERNAME'),
         password: configService.get('DATABASE_PASSWORD'),
         database: configService.get('DATABASE_NAME'),
-        entities: [User, Patient, Doctor, DoctorAvailability],
-        synchronize: true, // Set to false in production
+        // Register ALL entities here
+        entities: [User, Patient, Doctor, DoctorAvailability, Appointment],
+        synchronize: true, // Set to false in production!
+
         // dropSchema: true,
       }),
       inject: [ConfigService],

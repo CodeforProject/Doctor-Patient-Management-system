@@ -1,37 +1,50 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne, JoinColumn } from 'typeorm';
-import { DoctorAvailability } from './doctor-availability.entity';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, OneToMany, JoinColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { User } from './user.entity';
+import { DoctorAvailability } from './doctor-availability.entity';
+import { Appointment } from '../appointments/entities/appointment.entity';
 
 @Entity('doctors')
 export class Doctor {
   @PrimaryGeneratedColumn()
   doctor_id: number;
 
+  @Column({ nullable: true })
+  user_id: number;
+
   @Column()
   specialization: string;
 
-  @Column()
-  experience_years: number;
-
-  @Column('float')
-  consultation_fee: number;
+  @Column({ nullable: true })
+  license_number: string;
 
   @Column({ type: 'text', nullable: true })
-  about: string;
+  bio: string;
 
-  @Column('float', { default: 0 })
-  rating: number;
+  @Column({ nullable: true })
+  experience_years: number;
+
+  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
+  consultation_fee: number;
 
   @Column({ default: true })
   is_available: boolean;
 
-  @Column({ nullable: true })
-  user_id: number;
+  @Column({ default: 'active' })
+  status: string;
 
-  @OneToMany(() => DoctorAvailability, availability => availability.doctor)
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
+
+  @OneToOne(() => User, { eager: true })
+  @JoinColumn({ name: 'user_id' })
+  user: User;
+
+  @OneToMany(() => DoctorAvailability, (availability) => availability.doctor)
   availabilities: DoctorAvailability[];
 
-  @OneToOne(() => User, { cascade: true })
-  @JoinColumn({ name: 'user_id' })  // FK on doctors table
-  user: User;
+  @OneToMany(() => Appointment, (appointment) => appointment.doctor)
+  appointments: Appointment[];
 }

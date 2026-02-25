@@ -1,5 +1,4 @@
-// src/entities/user.entity.ts
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity('users')
 export class User {
@@ -12,18 +11,22 @@ export class User {
   @Column({ unique: true })
   email: string;
 
-  @Column()
-  phone: string;
-
-  @Column()
+  @Column({ nullable: true })
   password_hash: string;
 
-  @Column({ type: 'enum', enum: ['doctor', 'patient'] })
+  // Simple string columns instead of enum (easier to manage)
+  @Column({ default: 'patient' })
   role: string;
 
   @Column({ default: 'active' })
   status: string;
 
+  @Column({ nullable: true })
+  google_id: string;
+
   @CreateDateColumn()
   created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }
